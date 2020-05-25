@@ -1,34 +1,7 @@
-﻿Select max(high) as Hourly_high,name,DATE_TRUNC('hour',
-   Coalesce(
-     try(date_parse(myh_yf_streamdata.ts, '%Y-%m-%d %H:%i:%s')),
-     try(date_parse(myh_yf_streamdata.ts, '%Y/%m/%d %H:%i:%s')),
-     try(date_parse(myh_yf_streamdata.ts, '%d %M %Y %H:%i:%s')),
-     try(date_parse(myh_yf_streamdata.ts, '%d/%m/%Y %H:%i:%s')),
-     try(date_parse(myh_yf_streamdata.ts, '%d-%m-%Y %H:%i:%s')),
-     try(date_parse(myh_yf_streamdata.ts, '%Y-%m-%d')),
-     try(date_parse(myh_yf_streamdata.ts, '%Y/%m/%d')),
-     try(date_parse(myh_yf_streamdata.ts, '%d %M %Y'))
-    ))as hour
-From myh_yf_streamdata
-group by name,DATE_TRUNC('hour',
-   Coalesce(
-     try(date_parse(myh_yf_streamdata.ts, '%Y-%m-%d %H:%i:%s')),
-     try(date_parse(myh_yf_streamdata.ts, '%Y/%m/%d %H:%i:%s')),
-     try(date_parse(myh_yf_streamdata.ts, '%d %M %Y %H:%i:%s')),
-     try(date_parse(myh_yf_streamdata.ts, '%d/%m/%Y %H:%i:%s')),
-     try(date_parse(myh_yf_streamdata.ts, '%d-%m-%Y %H:%i:%s')),
-     try(date_parse(myh_yf_streamdata.ts, '%Y-%m-%d')),
-     try(date_parse(myh_yf_streamdata.ts, '%Y/%m/%d')),
-     try(date_parse(myh_yf_streamdata.ts, '%d %M %Y'))
-    ))
-order by name,DATE_TRUNC('hour',
-   Coalesce(
-     try(date_parse(myh_yf_streamdata.ts, '%Y-%m-%d %H:%i:%s')),
-     try(date_parse(myh_yf_streamdata.ts, '%Y/%m/%d %H:%i:%s')),
-     try(date_parse(myh_yf_streamdata.ts, '%d %M %Y %H:%i:%s')),
-     try(date_parse(myh_yf_streamdata.ts, '%d/%m/%Y %H:%i:%s')),
-     try(date_parse(myh_yf_streamdata.ts, '%d-%m-%Y %H:%i:%s')),
-     try(date_parse(myh_yf_streamdata.ts, '%Y-%m-%d')),
-     try(date_parse(myh_yf_streamdata.ts, '%Y/%m/%d')),
-     try(date_parse(myh_yf_streamdata.ts, '%d %M %Y'))
-    )) asc
+SELECT name, max(high)as hourhigh,date_trunc('hour',date_parse(ts,
+         '%m-%d-%Y %H:%i:%s')) as exacthr
+FROM financedatatransform
+group by name,date_trunc('hour',date_parse(ts,
+         '%m-%d-%Y %H:%i:%s')) 
+order by name, date_trunc('hour',date_parse(ts,
+         '%m-%d-%Y %H:%i:%s')) asc
