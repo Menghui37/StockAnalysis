@@ -1,5 +1,5 @@
 # Stock Analysis
-## Stock data of ten companies were collected for analysis. The data is composed of stock name, timestamp, high and low stock price for every minute from May 14th, 2020 9:30am to May 14th, 2020 4:00pm. Data was obtained using AWS lambda and Kinesis Data Firehose delivery streams and downloaded in a s3 folder for AWS Athena query. 
+### Stock data of ten companies were collected for analysis. The data is composed of stock name, timestamp, high and low stock price for every minute from May 14th, 2020 9:30am to May 14th, 2020 4:00pm. Data was obtained using AWS lambda and Kinesis Data Firehose delivery streams and downloaded in a s3 folder for AWS Athena query. 
 ### The lambda function url for API gateway trigger is 
 https://3akihli6c5.execute-api.us-east-2.amazonaws.com/default/datacollectorfunc
 
